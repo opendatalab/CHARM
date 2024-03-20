@@ -1,10 +1,10 @@
 # CHARM✨ Benchmarking Chinese Commonsense Reasoning of LLMs: From Chinese-Specifics to Reasoning-Memorization Correlations
 [![arXiv](https://img.shields.io/badge/arXiv-2312.14033-b31b1b.svg)](https://arxiv.org/abs/2312.14033)
-
+[![license](https://img.shields.io/github/license/InternLM/opencompass.svg)](./LICENSE)
 <div align="center">
 
 📃[Paper](https://arxiv.org/abs/2312.14033)
-🏰[Project Page](https://gitlab.pjlab.org.cn/wujiang/charm/-/tree/dev/docs/index.html)
+🏰[Project Page](https://opendatalab.github.io/CHARM/)
 
 </div>
 
@@ -28,6 +28,7 @@
 
 ## 🧾 待做
 - [ ] 发布CHARM的数据。
+- [ ] 支持在Opencompass上进行推理。
 
 
 ## ✨CHARM
@@ -39,17 +40,17 @@
 全球常识领域包含了具有普遍理解性的常识，覆盖了现代生活中的各种对象和方面，是个体应当了解的知识。这些内容包括基础教育期望个体所掌握的基本知识。涉及到人物时，这些都是在全球范围内广为认可的人物。
 #### 🚩 中国常识领域
 中国常识领域包含了特定于中国的元素，我们将其分为以下七个方面：
-- **历史 (H)：** 包括中国历史上的重要事件和人物、中国的朝代以及关于中国历史的其他基础事实和共享知识。
+- **历史 *(H)* ：** 包括中国历史上的重要事件和人物、中国的朝代以及关于中国历史的其他基础事实和共享知识。
 
-- **传统文化与艺术 (CA)：** 囊括中国的传统文化艺术、文学作品和传统生活方式。
+- **传统文化与艺术 *(CA)*** 囊括中国的传统文化艺术、文学作品和传统生活方式。
 
-- **日常生活和习俗 (LC)：** 包括现代中国的日常生活、服装、食品、住房、交通、节日等。
+- **日常生活和习俗 *(LC)*** 包括现代中国的日常生活、服装、食品、住房、交通、节日等。
 
-- **娱乐 (E):** 包括现代中国日常生活中的电影、电视节目、音乐和其他娱乐活动。
-- **公众人物 (F):** 涵盖在中国社会广为人知的公众人物。
-- **地理 (G):** 包括中国的地理分布、自然景观和特色地区文化。
+- **娱乐 *(E)* :** 包括现代中国日常生活中的电影、电视节目、音乐和其他娱乐活动。
+- **公众人物 *(F)*** 涵盖在中国社会广为人知的公众人物。
+- **地理 *(G)*** 包括中国的地理分布、自然景观和特色地区文化。
 
-- **汉语语言 (L):** 包括中国语言的基本知识，如汉字、成语等。
+- **汉语语言 *(L)*** 包括中国语言的基本知识，如汉字、成语等。
 
 ### 📋 任务列表
 
@@ -489,7 +490,7 @@
         <tr>
             <td>1</td>
             <td>DeepSeek-67B</td>
-            <td>Yi-34B (<span style="color:red;">↑3</span>)</td>
+            <td>Yi-34B (<font color=red>↑3</font>)</td>
             <td>GPT-4 (<span style="color:red;">↑2</span>)</td>
         </tr>
         <tr>
@@ -630,7 +631,9 @@
 </div>
 
 
-## 🛠️使用 OpenCompass 对CHARM进行推理
-
 
 ## 🖊️ 引用
+
+## 💳 License
+
+此项目是在Apache 2.0许可下发布的 [license](./LICENSE).

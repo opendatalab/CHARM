@@ -1,12 +1,10 @@
 # CHARM✨ Benchmarking Chinese Commonsense Reasoning of LLMs: From Chinese-Specifics to Reasoning-Memorization Correlations
 [![arXiv](https://img.shields.io/badge/arXiv-2312.14033-b31b1b.svg)](https://arxiv.org/abs/2312.14033)
-
+[![license](https://img.shields.io/github/license/InternLM/opencompass.svg)](./LICENSE)
 <div align="center">
 
 📃[Paper](https://arxiv.org/abs/2312.14033)
-🏰[Project Page](https://gitlab.pjlab.org.cn/wujiang/charm/-/tree/dev/docs/index.html)
-<!-- 📚[LeaderBoard](https://open-compass.github.io/T-Eval/leaderboard.html) -->
-<!-- 🤗[HuggingFace](https://huggingface.co/datasets/lovesnowbest/T-Eval) -->
+🏰[Project Page](https://opendatalab.github.io/CHARM/)
 
 </div>
 
@@ -31,6 +29,7 @@ We built closely-interconnected reasoning and memorization tasks, and found that
 
 ## 🧾 TODO
 - [ ] Release the data for CHARM.
+- [ ] Support inference on Opencompass.
 
 
 ## ✨CHARM
@@ -45,17 +44,17 @@ It includes foundational knowledge that someone with a basic modern education is
 
 #### 🚩 Chinese commonsense domain
 Chinese commonsense domain encompasses Chinese-specific elements. We categoried them into 7 aspects:
-- **History (H)** includes important events and figures in Chinese history, China's dynasties, and other basic  facts and shared knowledge about the history of China.
+- **History *(H)*** includes important events and figures in Chinese history, China's dynasties, and other basic  facts and shared knowledge about the history of China.
 
-- **Traditional Culture and Arts (CA)** encompasses Chinese traditional cultural arts, literary works, and traditional lifestyles.
+- **Traditional Culture and Arts *(CA)*** encompasses Chinese traditional cultural arts, literary works, and traditional lifestyles.
 
-- **Daily Life and Customs (LC)** includes modern Chinese daily routines, clothing, food, housing, transportation festivals and so on.
+- **Daily Life and Customs *(LC)*** includes modern Chinese daily routines, clothing, food, housing, transportation festivals and so on.
 
-- **Entertainment (E)** includes the movies, television programs, music, and other entertainments in modern Chinese daily life.
-- **Public Figures (F)** encompasses the public figures well-known in Chinese society.
+- **Entertainment *(E)*** includes the movies, television programs, music, and other entertainments in modern Chinese daily life.
+- **Public Figures *(F)*** encompasses the public figures well-known in Chinese society.
 - **Geography (G)** includes China's geographical distribution, natural landscapes, and characteristic regional cultures.
 
-- **Chinese Language (L)** includes the fundamentals of the Chinese language, such as Chinese characters, idioms and so on.
+- **Chinese Language *(L)*** includes the fundamentals of the Chinese language, such as Chinese characters, idioms and so on.
 
 ### 📋 Task List
 
@@ -635,7 +634,9 @@ We propose two methods to compare the LLMs' memorization-independent reasoning o
 </div>
 
 
-## 🛠️Inference CHARM with OpenCompass
-
 
 ## 🖊️ Citation
+
+## 💳 License
+
+This project is released under the Apache 2.0 [license](./LICENSE).
