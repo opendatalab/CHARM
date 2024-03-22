@@ -1,5 +1,5 @@
 # CHARM✨ Benchmarking Chinese Commonsense Reasoning of LLMs: From Chinese-Specifics to Reasoning-Memorization Correlations
-[![arXiv](https://img.shields.io/badge/arXiv-2312.14033-b31b1b.svg)](https://arxiv.org/abs/2403.14112)
+[![arXiv](https://img.shields.io/badge/arXiv-2403.14112-b31b1b.svg)](https://arxiv.org/abs/2403.14112)
 [![license](https://img.shields.io/github/license/InternLM/opencompass.svg)](./LICENSE)
 <div align="center">
 
@@ -26,7 +26,7 @@
 ## 🚀 新增功能
 - **[2024.3.21]** 论文发布在 [ArXiv](https://arxiv.org/abs/2403.14112). 🔥🔥🔥
 
-## 🧾 待做
+## 🧾 待办
 - [ ] 发布CHARM的数据。
 - [ ] 支持在Opencompass上进行推理。
 
@@ -633,7 +633,17 @@
 
 
 ## 🖊️ 引用
+```bibtex
+@misc{sun2024benchmarking,
+      title={Benchmarking Chinese Commonsense Reasoning of LLMs: From Chinese-Specifics to Reasoning-Memorization Correlations}, 
+      author={Jiaxing Sun and Weiquan Huang and Jiang Wu and Chenya Gu and Wei Li and Songyang Zhang and Hang Yan and Conghui He},
+      year={2024},
+      eprint={2403.14112},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
 
-## 💳 License
+## 💳 许可
 
 此项目是在Apache 2.0许可下发布的 [license](./LICENSE).

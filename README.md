@@ -1,5 +1,5 @@
 # CHARM✨ Benchmarking Chinese Commonsense Reasoning of LLMs: From Chinese-Specifics to Reasoning-Memorization Correlations
-[![arXiv](https://img.shields.io/badge/arXiv-2312.14033-b31b1b.svg)](https://arxiv.org/abs/2403.14112)
+[![arXiv](https://img.shields.io/badge/arXiv-2403.14112-b31b1b.svg)](https://arxiv.org/abs/2403.14112)
 [![license](https://img.shields.io/github/license/InternLM/opencompass.svg)](./LICENSE)
 <div align="center">
 
@@ -636,6 +636,16 @@ We propose two methods to compare the LLMs' memorization-independent reasoning o
 
 
 ## 🖊️ Citation
+```bibtex
+@misc{sun2024benchmarking,
+      title={Benchmarking Chinese Commonsense Reasoning of LLMs: From Chinese-Specifics to Reasoning-Memorization Correlations}, 
+      author={Jiaxing Sun and Weiquan Huang and Jiang Wu and Chenya Gu and Wei Li and Songyang Zhang and Hang Yan and Conghui He},
+      year={2024},
+      eprint={2403.14112},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
 
 ## 💳 License
 
