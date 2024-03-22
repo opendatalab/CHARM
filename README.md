@@ -1,9 +1,9 @@
 # CHARM✨ Benchmarking Chinese Commonsense Reasoning of LLMs: From Chinese-Specifics to Reasoning-Memorization Correlations
-[![arXiv](https://img.shields.io/badge/arXiv-2312.14033-b31b1b.svg)](https://arxiv.org/abs/2312.14033)
+[![arXiv](https://img.shields.io/badge/arXiv-2312.14033-b31b1b.svg)](https://arxiv.org/abs/2403.14112)
 [![license](https://img.shields.io/github/license/InternLM/opencompass.svg)](./LICENSE)
 <div align="center">
 
-📃[Paper](https://arxiv.org/abs/2312.14033)
+📃[Paper](https://arxiv.org/abs/2403.14112)
 🏰[Project Page](https://opendatalab.github.io/CHARM/)
 
 </div>
@@ -25,7 +25,7 @@ We built closely-interconnected reasoning and memorization tasks, and found that
 
 
 ## 🚀 What's New
-- **[2024.3.21]** Paper available on [ArXiv](https://arxiv.orgxxxxx). 🔥🔥🔥
+- **[2024.3.21]** Paper available on [ArXiv](https://arxiv.org/abs/2403.14112). 🔥🔥🔥
 
 ## 🧾 TODO
 - [ ] Release the data for CHARM.
