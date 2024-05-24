@@ -355,13 +355,6 @@
         margin: 16px 0px;
     }
 
-    .paper-btn-parent1 {
-        display: flex;
-        justify-content: center;
-        margin: 8px 0px;
-        opacity: 1;
-    }
-
     .paper-btn:hover {
         opacity: 0.85;
     }
@@ -583,37 +576,38 @@
                     <span><small><sup>†</sup> Project lead </small></span>
                     <span><small><sup>‡</sup> Corresponding Author </small></span>
                 </div>
+
+                <!-- <div class="affil-row">
+            <div class="venue text-center"><b>NeurlIPS 2023 </b></div>
+        </div> -->
+                <p></p>
+                <div class="paper-btn-parent2">
+                    <a class="paper-btn-child" href="./index.html">English</a>
+                    <span class="separator">|</span>
+                    <a class="paper-btn-child" href="./index_ZH.html">中文</a>
+                </div>
+
+
             </center>
-
-            <p></p>
-            <div class="paper-btn-parent2">
-                <a class="paper-btn-child" href="./index.html">English</a>
-                <span class="separator">|</span>
-                <a class="paper-btn-child" href="./index_ZH.html">中文</a>
-            </div>
-
-
-
-
 
             <div style="clear: both">
                 <div class="paper-btn-parent">
                     <a class="paper-btn" href="https://arxiv.org/abs/2403.14112">
                         <span class="material-icons"> description </span>
-                        Paper
+                        论文
                     </a>
 
                     <a class="paper-btn" href="https://github.com/opendatalab/CHARM">
                         <span class="material-icons"> code </span>
-                        Code
+                        代码
                     </a>
-                    <a class="paper-btn" href="./leaderboard.html">
+                    <a class="paper-btn" href="./leaderboard_ZH.html">
                         <span class="material-icons"> description </span>
-                        Leaderboard
+                        排行榜
                     </a>
-                    <a class="paper-btn" href="./findings.html">
+                    <a class="paper-btn" href="./findings_ZH.html">
                         <span class="material-icons"> description </span>
-                        Findings
+                        发现
                     </a>
                 </div>
             </div>
@@ -626,7 +620,7 @@
                         <img width="100%" src="./figure/Fig2_CHARM_construction.png">
                     </a>
                     <p class="caption" , style="text-align: center;">
-                        Construction of <b>CHARM</b>.
+                        <b>CHARM</b>的构建流程
                     </p>
                 </figure>
             </center>
@@ -634,20 +628,20 @@
 
 
         <html lang="en">
-        <h4>Comparison of commonsense reasoning benchmarks. </h4>
+        <h4>与其他常识推理评测基准的比较 </h4>
         <table align="center">
             <thead class="fixed-header">
                 <tr>
-                    <th>Benchmarks</th>
-                    <th>CN-Lang</th>
-                    <th>CSR</th>
-                    <th>CN-specifics</th>
-                    <th>Dual-Domain</th>
-                    <th>Rea-Mem</th>
+                    <th>基准</th>
+                    <th>汉语</th>
+                    <th>常识推理</th>
+                    <th>中国特有知识</th>
+                    <th>中国和世界知识域</th>
+                    <th>推理和记忆的关系</th>
                 </tr>
             </thead>
             <tr>
-                <td>Most benchmarks in <a href="https://arxiv.org/abs/2302.04752"> davis2023benchmarks</a></td>
+                <td><a href="https://arxiv.org/abs/2302.04752"> davis2023benchmarks</a> 中提到的基准</td>
                 <td><strong><span style="color: red;">&#x2718;</span></strong></td>
                 <td><strong><span style="color: green;">&#x2714;</span></strong></td>
                 <td><strong><span style="color: red;">&#x2718;</span></strong></td>
@@ -665,7 +659,7 @@
                 <td><strong><span style="color: red;">&#x2718;</span></strong></td>
             </tr>
             <tr>
-                <td><a href="https://arxiv.org/abs/2007.08124">LogiQA</a>, <a
+                <td><a href="https://arxiv.org/abs/2007.08124">LogiQA</a>,<a
                         href="https://arxiv.org/abs/2004.05986">CLUE</a>, <a
                         href="https://arxiv.org/abs/2306.09212">CMMLU</a></td>
                 <td><strong><span style="color: green;">&#x2714;</span></strong></td>
@@ -692,63 +686,38 @@
             </tr>
         </table>
 
-        <p>"CN-Lang" indicates the benchmark is presented in Chinese
-            language. "CSR" means the benchmark is designed to focus on <strong>C</strong>ommon<strong>S</strong>ense
-            <strong>R</strong>easoning. "CN-specific" indicates the benchmark includes elements that are unique to
-            Chinese culture, language, regional characteristics, history, etc. "Dual-Domain" indicates the benchmark
-            encompasses both Chinese-specific and global domain tasks, with questions presented in the similar style and
-            format. "Rea-Mem" indicates the benchmark includes closely-interconnected <strong>rea</strong>soning and
-            <strong>mem</strong>orization tasks.
-        </p>
-
-
-
-
 
         <body>
             <h5>✨CHARM</h5>
-            <p><strong>CHARM</strong> is the first benchmark for comprehensively and in-depth evaluating the commonsense
-                reasoning ability of large language models (LLMs) in Chinese, which covers both globally known and
-                Chinese-specific commonsense. In addition, the CHARM can evaluate the LLMs' memorization-independent
-                reasoning abilities and analyze the typical errors.</p>
+            <p><strong>CHARM</strong> 是首个全面深入评估大型语言模型（LLMs）在中文常识推理能力的基准测试，它覆盖了国际普遍认知的常识以及独特的中国文化常识。此外，CHARM 还可以评估 LLMs
+                独立于记忆的推理能力，并分析其典型错误。</p>
 
-            <h3>📖 Commonsense Domain</h3>
-            <h4>🌐 Global commonsense domain</h4>
-            <p>Global commonsense domain consists of universally understood commonsense. It covers objects and aspects
-                of modern life that an individual should be aware of. It includes foundational knowledge that someone
-                with a basic modern education is expected to know. When it involves individuals, they are globally
-                recognized figures.</p>
+            <h3>📖 常识领域</h3>
+            <h4>🌐 全球常识领域</h4>
+            <p>全球常识领域包含了具有普遍理解性的常识，覆盖了现代生活中的各种对象和方面，是个体应当了解的知识。这些内容包括基础教育期望个体所掌握的基本知识。涉及到人物时，这些都是在全球范围内广为认可的人物。</p>
 
-            <h4>🚩 Chinese commonsense domain</h4>
-            <p>Chinese commonsense domain encompasses Chinese-specific elements. We categorize them into 7 aspects:</p>
+            <h4>🚩 中国常识领域</h4>
+            <p>中国常识领域包含了特定于中国的元素，我们将其分为以下七个方面：</p>
             <ul>
-                <li><strong>History (H):</strong> includes important events and figures in Chinese history, China's
-                    dynasties, and other basic facts and shared knowledge about the history of China.</li>
-                <li><strong>Traditional Culture and Arts (CA):</strong> encompasses Chinese traditional cultural arts,
-                    literary works, and traditional lifestyles.</li>
-                <li><strong>Daily Life and Customs (LC):</strong> includes modern Chinese daily routines, clothing,
-                    food, housing, transportation festivals and so on.</li>
-                <li><strong>Entertainment (E):</strong> includes the movies, television programs, music, and other
-                    entertainments in modern Chinese daily life.</li>
-                <li><strong>Public Figures (F):</strong> encompasses the public figures well-known in Chinese society.
+                <li><strong>历史 (H):</strong> 括中国历史上的重要事件和人物、中国的朝代以及关于中国历史的其他基础事实和共享知识。</li>
+                <li><strong>传统文化与艺术 (CA)</strong> 囊括中国的传统文化艺术、文学作品和传统生活方式。</li>
+                <li><strong>日常生活和习俗 (LC):</strong> 包括现代中国的日常生活、服装、食品、住房、交通、节日等。
                 </li>
-                <li><strong>Geography (G):</strong> includes China's geographical distribution, natural landscapes, and
-                    characteristic regional cultures.</li>
-                <li><strong>Chinese Language (L):</strong> includes the fundamentals of the Chinese language, such as
-                    Chinese characters, idioms and so on.</li>
+                <li><strong>娱乐 (E):</strong> 包括现代中国日常生活中的电影、电视节目、音乐和其他娱乐活动。</li>
+                <li><strong>公众人物 (F):</strong> 涵盖在中国社会广为人知的公众人物。
+                </li>
+                <li><strong>地理 (G):</strong> 包括中国的地理分布、自然景观和特色地区文化。</li>
+                <li><strong>汉语语言 (L):</strong> 包括中国语言的基本知识，如汉字、成语等。</li>
             </ul>
 
             <body>
-                <h3>📋 Task List</h3>
+                <h3>📋 任务列表</h3>
                 <ul>
-                    <li><strong>Reasoning Tasks:</strong> The charm consists of 7 reasoning tasks, which are:
-                        <strong>Anachronisms Judgment (AJ), Time Understanding (TU), Sequence Understanding (SqU), Movie
-                            and Music Recommendation (MMR), Sport Understanding (SpU), Natural Language Inference (NLI),
-                            Reading Comprehension (RC).</strong>
+                    <li><strong>推理任务:</strong> CHARM 由7个推理任务组成，包括：
+                        <strong>时代错误判断（AJ）、时间理解（TU）、序列理解（SqU）、电影和音乐推荐（MMR）、体育理解（SpU）、自然语言推断（NLI）以及阅读理解（RC）。</strong>
                     </li>
-                    <li><strong>Memorization Tasks:</strong> We chose tasks that can be readily associated in this
-                        manner, <strong>AJ, TU, MMR, SpU,</strong> referred to as the
-                        Memorization-Reasoning-Interconnected (MRI) tasks, and built the related memorization questions.
+                    <li><strong>记忆任务:</strong> 我们选择了<strong>AJ（时代错误判断）, TU（时间理解）, MMR（电影和音乐推荐）, SpU（体育理解）,</strong>
+                        这些被称为记忆-推理-互联（MRI）的任务，我们构建了与这些推理任务相关的记忆任务。
                     </li>
                 </ul>
             </body>
@@ -764,154 +733,155 @@
     <table align="center">
         <thead class="fixed-header">
             <tr>
-                <th>Task Type</th>
-                <th>Task</th>
-                <th>Domain</th>
-                <th>Chinese aspects</th>
+                <th>任务类型</th>
+                <th>任务</th>
+                <th>常识领域</th>
+                <th>中国常识方面</th>
                 <!-- <th>Construction</th> -->
-                <th>Question Type</th>
-                <th># Question</th>
+                <th>题目类型</th>
+                <th># 题目数量</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td rowspan="14" style="vertical-align: middle;">Reasoning</td>
-                <td rowspan="2">Anachronisms Judgment (AJ)</td>
-                <td>Chinese</td>
+                <td rowspan="14" style="vertical-align: middle;">推理</td>
+                <td rowspan="2">时代错误 (AJ)</td>
+                <td>中国的</td>
                 <td><i>H, AC, LC, F</i></td>
                 <!-- <td>[H]</td> -->
-                <td>2-option MCQ</td>
+                <td>二选项多选题</td>
                 <td>150</td>
             </tr>
             <tr>
-                <td>global</td>
+                <td>全球的</td>
                 <td>-</td>
                 <!-- <td>[T][H]</td> -->
-                <td>2-option MCQ</td>
+                <td>二选项多选题</td>
                 <td>150</td>
             </tr>
             <tr>
-                <td rowspan="2">Time Understanding (TU)</td>
-                <td>Chinese</td>
+                <td rowspan="2">时间理解 (TU)</td>
+                <td>中国的</td>
                 <td><i>H, AC, LC</i></td>
                 <!-- <td>[H]</td> -->
-                <td>4-option MCQ</td>
+                <td>四选项多选题</td>
                 <td>100</td>
             <tr>
             <tr>
-                <td rowspan="2">Sequence Understanding (SqU)</td>
-                <td>Chinese</td>
+                <td rowspan="2">顺序理解 (SqU)</td>
+                <td>中国的</td>
                 <td><i>H, CA, LC, G, L</i></td>
                 <!-- <td>[H]</td> -->
-                <td>4-option MCQ</td>
+                <td>四选项多选题</td>
                 <td>100</td>
             </tr>
             <tr>
-                <td>global</td>
+                <td>全球的</td>
                 <td>-</td>
                 <!-- <td>[T][H]</td> -->
-                <td>4-option MCQ</td>
+                <td>四选项多选题</td>
                 <td>100</td>
             </tr>
 
             <tr>
-                <td rowspan="2">Movie and Music Recommendation (MMR)</td>
-                <td>Chinese</td>
+                <td rowspan="2">电影和音乐推荐 (MMR)</td>
+                <td>中国的</td>
                 <td><i>E</i></td>
                 <!-- <td>[H]</td> -->
-                <td>4-option MCQ</td>
+                <td>四选项多选题</td>
                 <td>50</td>
             </tr>
             <tr>
-                <td>global</td>
+                <td>全球的</td>
                 <td>-</td>
                 <!-- <td>[T]</td> -->
-                <td>4-option MCQ</td>
+                <td>四选项多选题</td>
                 <td>50</td>
             </tr>
             <tr>
-                <td rowspan="2">Sport Understanding (SpU)</td>
-                <td>Chinese</td>
+                <td rowspan="2">体育理解 (SpU)</td>
+                <td>中国的</td>
                 <td><i>F</i></td>
                 <!-- <td>[H]</td> -->
-                <td>2-option MCQ</td>
+                <td>二选项多选题</td>
                 <td>200</td>
             </tr>
             <tr>
-                <td>global</td>
+                <td>全球的</td>
                 <td>-</td>
                 <!-- <td>[H]</td> -->
-                <td>2-option MCQ</td>
+                <td>二选项多选题</td>
                 <td>200</td>
             </tr>
 
             <tr>
-                <td rowspan="2">Natural Language Inference (NLI)</td>
-                <td>Chinese</td>
+                <td rowspan="2">自然语言推理 (NLI)</td>
+                <td>中国的</td>
                 <td><i>G, E, L</i></td>
                 <!-- <td>[S][H]</td> -->
-                <td>3-option MCQ</td>
+                <td>三选项多选题</td>
                 <td>100</td>
             </tr>
             <tr>
-                <td>global</td>
+                <td>全球的</td>
                 <td>-</td>
                 <!-- <td>[S]</td> -->
-                <td>3-option MCQ</td>
+                <td>三选项多选题</td>
                 <td>100</td>
             </tr>
 
             <tr>
-                <td rowspan="2">Reading Comprehension (RC)</td>
-                <td>Chinese</td>
-                <td>all 7 aspects</td>
+                <td rowspan="2">阅读理解 (RC)</td>
+                <td>中国的</td>
+                <td>全部7个方面</td>
                 <!-- <td>[S]</td> -->
-                <td>4-option MCQ</td>
+                <td>四选项多选题</td>
                 <td>200</td>
             </tr>
             <tr>
-                <td>global</td>
+                <td>全球的</td>
                 <td>-</td>
                 <!-- <td>[S]</td> -->
-                <td>4-option MCQ</td>
+                <td>四选项多选题</td>
                 <td>200</td>
             </tr>
             <tr>
                 <td rowspan="4" style="vertical-align: middle;">Memorization</td>
-                <td>Anachronisms Judgment (AJ)</td>
-                <td>Chinese</td>
+                <td>时代错误 (AJ)</td>
+                <td>中国的</td>
                 <td><i>H, AC, LC, F</i></td>
                 <!-- <td>[H]</td> -->
-                <td>Free-form QA</td>
+                <td>问答题</td>
                 <td>150</td>
             </tr>
 
             <tr>
-                <td>Time Understanding (TU)</td>
-                <td>Chinese</td>
+                <td>时间理解 (TU)</td>
+                <td>中国的</td>
                 <td><i>H, AC, LC</i></td>
                 <!-- <td>[H]</td> -->
-                <td>Free-form QA</td>
+                <td>问答题</td>
                 <td>83</td>
             </tr>
 
             <tr>
-                <td>Movie and Music Recommendation (MMR)</td>
-                <td>Chinese</td>
+                <td>电影和音乐推荐 (MMR)</td>
+                <td>中国的</td>
                 <td><i>E</i></td>
                 <!-- <td>[H]</td> -->
-                <td>Free-form QA</td>
+                <td>问答题</td>
                 <td>399</td>
             </tr>
 
             <tr>
-                <td>Sport Understanding (SpU)</td>
-                <td>Chinese</td>
+                <td>体育理解 (SpU)</td>
+                <td>中国的</td>
                 <td><i>F</i></td>
                 <!-- <td>[H]</td> -->
-                <td>Free-form QA</td>
+                <td>问答题</td>
                 <td>127</td>
             </tr>
+
 
 
             </tr>
@@ -923,7 +893,7 @@
 </section>
 
 
-<h3>🖊️ Citation</h3>
+<h3>🖊️ 引用</h3>
 <pre>
 @misc{sun2024benchmarking,
       title={Benchmarking Chinese Commonsense Reasoning of LLMs: From Chinese-Specifics to Reasoning-Memorization Correlations}, 

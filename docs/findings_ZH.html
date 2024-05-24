@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400&display=swap" rel="stylesheet">
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>CHARM Findings</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,400italic,600italic,300,300italic'
+    rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+  <!-- favicon.svg -->
+  <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👍</text></svg>"> -->
+  <!-- <link rel="icon" href="/favicon.svg" /> -->
+  <link rel="icon" href="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/512px/1f6e0.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+
+  <style type="text/css">
+    body {
+      font-family: "Titillium Web", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      font-weight: 300;
+      font-size: 20px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media screen and (min-width: 980px) {
+      body {
+        width: 980px;
+      }
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th,
+    tbody td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+      font-size: 17px;
+      /* 调整字体大小为14像素 */
+    }
+
+    td strong {
+      font-weight: bold;
+      /* 设置字体为粗体 */
+    }
+
+    thead th {
+      background-color: lightgray;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tbody tr:hover {
+      background-color: #ddd;
+    }
+
+    .fixed-header {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: #f9f9f9;
+    }
+
+
+    h4 {
+      text-align: center;
+      font-weight: 300;
+      line-height: 1.15em;
+      font-size: 20px;
+      font-weight: bold;
+      /* 设置标题的字号大小 */
+
+    }
+
+    h2 {
+      font-size: 1.75em;
+    }
+
+    a:link,
+    a:visited {
+      color: #5364cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #208799;
+    }
+
+    h3 {
+      text-align: left;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 40px;
+      font-weight: 500;
+    }
+
+    h2 {
+      font-weight: 400;
+      margin: 16px 0px 4px 0px;
+    }
+
+    h3 {
+      font-weight: 600;
+      margin: 16px 0px 4px 0px;
+    }
+
+    .paper-title {
+      padding: 1px 0px 1px 0px;
+    }
+
+    h5 {
+      font-size: 24px;
+      color: #800080;
+    }
+
+    h6 {
+      color: #008080;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+
+    section {
+      margin: 32px 0px 32px 0px;
+      text-align: justify;
+      clear: both;
+    }
+
+    .col-5 {
+      width: 20%;
+      float: left;
+    }
+
+    .move-down {
+      margin-top: 1.2cm;
+    }
+
+    .col-4 {
+      width: 25%;
+      float: left;
+    }
+
+    .col-3 {
+      width: 33%;
+      float: left;
+    }
+
+    .col-2 {
+      width: 50%;
+      float: left;
+    }
+
+    .col-1 {
+      width: 100%;
+      float: left;
+    }
+
+    .author-row,
+    .affil-row {
+      font-size: 17px;
+    }
+
+    .author-row-new {
+      text-align: center;
+    }
+
+    .author-row-new a {
+      display: inline-block;
+      font-size: 17px;
+      padding: 4px;
+    }
+
+    .author-row-new sup {
+      color: #313436;
+      font-size: 13 px;
+      padding: 4px;
+    }
+
+    .affiliations-new {
+      font-size: 16px;
+      text-align: center;
+      width: 80%;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+
+    .row {
+      margin: 16px 0px 16px 0px;
+    }
+
+    .authors {
+      font-size: 26px;
+    }
+
+    .affiliatons {
+      font-size: 18px;
+    }
+
+    .affil-row {
+      margin-top: 18px;
+    }
+
+    .teaser {
+      max-width: 100%;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .screenshot {
+      width: 256px;
+      border: 1px solid #ddd;
+    }
+
+    .screenshot-el {
+      margin-bottom: 16px;
+    }
+
+    hr {
+      height: 1px;
+      border: 0;
+      border-top: 1px solid #ddd;
+      margin: 0;
+    }
+
+    .material-icons {
+      vertical-align: -6px;
+    }
+
+    p {
+      line-height: 1.25em;
+    }
+
+    .caption {
+      font-size: 20px;
+      color: #000000;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      text-align: left;
+      font-weight: bold;
+    }
+
+
+    video {
+      display: block;
+      margin: auto;
+    }
+
+
+    figure {
+      display: block;
+      margin: auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    #bibtex pre {
+      font-size: 14px;
+      background-color: #eee;
+      padding: 16px;
+    }
+
+    .blue {
+      color: #2c82c9;
+      font-weight: bold;
+    }
+
+    .orange {
+      color: #d35400;
+      font-weight: bold;
+    }
+
+    .flex-row {
+      display: flex;
+      flex-flow: row wrap;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .flex-row-center {
+      display: flex;
+      flex-flow: row wrap;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .flex-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .flex-item {
+      flex: 0 0 50%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .paper-btn-coming-soon {
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+
+    .coming-soon {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+    }
+
+    .center {
+      margin-left: 10.0%;
+      margin-right: 10.0%;
+    }
+
+    .paper-btn {
+      position: relative;
+      text-align: center;
+
+      display: inline-block;
+      margin: 8px;
+      padding: 8px 8px;
+
+      border-width: 0;
+      outline: none;
+      border-radius: 2px;
+
+      background-color: #E0F7FA;
+      color: #01579B !important;
+      font-size: 20px;
+      width: 200px;
+      font-weight: 600;
+    }
+
+    .paper-btn-tapestry {
+      position: relative;
+      text-align: center;
+
+      display: inline-block;
+      margin: 8px;
+      padding: 8px 8px;
+
+      border-width: 0;
+      outline: none;
+      border-radius: 2px;
+
+      background-color: #5364cc;
+      color: white !important;
+      font-size: 20px;
+      width: 200px;
+      font-weight: 600;
+    }
+
+    .paper-btn-parent {
+      display: flex;
+      justify-content: center;
+      margin: 16px 0px;
+    }
+
+    .paper-btn:hover {
+      opacity: 0.85;
+    }
+
+    .container {
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .venue {
+      font-size: 23px;
+    }
+
+    .topnav {
+      background-color: #EEEEEE;
+      overflow: hidden;
+    }
+
+    .topnav div {
+      max-width: 1070px;
+      margin: 0 auto;
+    }
+
+    .topnav a {
+      display: inline-block;
+      color: black;
+      text-align: center;
+      vertical-align: middle;
+      padding: 16px 16px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .topnav img {
+      padding: 2px 0px;
+      width: 100%;
+      margin: 0.2em 0px 0.3em 0px;
+      vertical-align: middle;
+    }
+
+    pre {
+      font-size: 0.9em;
+      padding-left: 7px;
+      padding-right: 7px;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      border-radius: 3px;
+      background-color: rgb(235, 235, 235);
+      overflow-x: auto;
+    }
+
+    .download-thumb {
+      display: flex;
+    }
+
+    @media only screen and (max-width: 620px) {
+      .download-thumb {
+        display: none;
+      }
+    }
+
+    .paper-stuff {
+      width: 50%;
+      font-size: 20px;
+    }
+
+    @media only screen and (max-width: 620px) {
+      .paper-stuff {
+        width: 100%;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .column {
+      text-align: center;
+      float: left;
+      width: 16.666%;
+      padding: 5px;
+    }
+
+    .column3 {
+      text-align: center;
+      float: left;
+      width: 33.333%;
+      padding: 5px;
+    }
+
+    .column4 {
+      text-align: center;
+      float: left;
+      width: 50%;
+      padding: 5px;
+    }
+
+    .column5 {
+      text-align: center;
+      float: left;
+      width: 20%;
+      padding: 5px;
+    }
+
+    .column10 {
+      text-align: center;
+      float: left;
+      width: 10%;
+      padding: 5px;
+    }
+
+    .border-right {
+      border-right: 1px solid black;
+    }
+
+    .border-bottom {
+      border-bottom: 1px solid black;
+    }
+
+
+    .row-center {
+      margin: 16px 0px 16px 0px;
+      text-align: center;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .img-fluid {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .figure-img {
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .rounded-circle {
+      border-radius: 50% !important;
+    }
+
+    /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 500px) {
+      .column {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      .column3 {
+        width: 100%;
+      }
+    }
+
+    .paper-btn-parent2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .paper-btn-child {
+      margin: 0 10px;
+      /* 添加适当的间距 */
+    }
+
+    .separator {
+      width: 5px;
+      /* 设置分隔符的宽度 */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="content" class="container-fluid d-flex flex-column align-items-center gap-3">
+      <h1 class="text-nowrap mt-5">✨ CHARM 的发现 ✨</h1>
+      <h3 class="fw-light text-nowrap"><small id="warning">Benchmarking Chinese Commonsense Reasoning of LLMs: From
+          Chinese-Specifics to Reasoning-Memorization Correlations.<br></small></h3>
+
+      <p></p>
+      <div class="paper-btn-parent2">
+        <a class="paper-btn-child" href="./findings.html">English</a>
+        <span class="separator">|</span>
+        <a class="paper-btn-child" href="./findings_ZH.html">中文</a>
+      </div>
+
+      <div style="clear: both">
+        <div class="paper-btn-parent">
+          <a class="paper-btn" href="https://arxiv.org/abs/2403.14112">
+            <span class="material-icons"> description </span>
+            论文
+          </a>
+          <a class="paper-btn" href="https://github.com/opendatalab/CHARM">
+            <span class="material-icons"> code </span>
+            代码
+          </a>
+          <a class="paper-btn" href="./index_ZH.html">
+            <span class="material-icons"> description </span>
+            项目页面
+          </a>
+          <a class="paper-btn" href="./leaderboard_ZH.html">
+            <span class="material-icons"> description </span>
+            排行榜
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <p><strong>💡 此页面将展示基于CHARM的一些结论和发现，包括提示策略、综合推理与记忆对比，以及独立于记忆的推理。</strong></p>
+    <div>
+      <section id="prompt">
+        <h3>提示策略</h3>
+        <p></p>
+
+        <body>
+          <p>我们选择了5种常用的提示策略，并评估了19种LLMs在CHARM推理任务上的表现。我们评估了当前常用的LLMs，这些可以分为两类：</p>
+          (1) 7 个国外大语言模型, 包括 GPT-3.5, GPT4, LLaMA-2 (7B,13B,70B), and Vicuna (7B,13B).<br>
+          (2) 12 国内大语言模型, 包括
+          ChatGLM3 (6B), Baichuan2 (7B,13B), InternLM2 (7B,20B), Yi (6B,34B), DeepSeek (7B,67B) and Qwen (7B,14B,72B).
+        </body>
+        <p></p>
+        <h4> 提示策略示例 </h4>
+        <table align="center">
+          <thead class="fixed-header">
+            <tr style="text-align: center;">
+              <th>提示策略</th>
+              <th>描述</th>
+              <th>示例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Direct</td>
+              <td>LLM不进行中间推理，而是直接预测答案。</td>
+              <td>Q：以下陈述是否包含时代错误，请选择正确选项。一个接受了义务教育、具备基本常识的人会如何选择？李白用钢笔写诗。<br>选项：(A) 是 (B) 否 <br>A:(A)</td>
+            </tr>
+            <tr>
+              <td>ZH-CoT</td>
+              <td>LLM在给出答案之前会用中文进行中间推理。</td>
+              <td>Q：以下陈述是否包含时代错误，请选择正确选项。一个接受了义务教育、具备基本常识的人会如何选择？李白用钢笔写诗。<br>选项：(A) 是 (B)
+                否<br>A：让我们一步一步来思考。这个陈述提到了“李白”，他是中国唐朝时期的诗人。而陈述中提到的“钢笔”是现代设备，因此李白不可能使用钢笔写诗，该陈述包含时代错误。所以答案是(A)。</td>
+            </tr>
+            <tr>
+              <td>EN-CoT</td>
+              <td>针对中文问题，CoT的推理过程是用英语进行的。</td>
+              <td>Q：以下陈述是否包含时代错误，请选择正确选项。一个接受了义务教育、具备基本常识的人会如何选择？李白用钢笔写诗。<br>选项：(A) 是 (B) 否<br>A：Let's think step by
+                step.This
+                statement mentions "Li Bai", a poet from the Tang Dynasty in China. The "pen" mentioned in the statement
+                is a modern device, so it is impossible for Li Bai to write poetry with a pen. This statement contains
+                errors from the times. So the answer is (A).</td>
+            </tr>
+            <tr>
+              <td>Translate-EN</td>
+              <td>我们使用了<a href="https://www.deepl.com/translator">DeepL api</a>将我们的基准测试翻译成英文，然后使用英文的CoT进行推理。
+              </td>
+              <td>Q: Choose the correct option if the following statement contains an anachronism. How would a person
+                with compulsory education and basic common sense choose?Li Bai wrote poetry with a fountain
+                pen.<br>Options:(A) Yes (B) No<br>A: Let's think step by step.The statement mentions "Li Bai", a Chinese
+                poet
+                from the Tang Dynasty. The "fountain pen" mentioned in the statement is a modern device, so Li Bai could
+                not have used a fountain pen to write his poems, and the statement contains an anachronism. The answer
+                is (A).</td>
+            </tr>
+            <tr>
+              <td>XLT</td>
+              <td>模板提示XLT被用来将原始问题转换成英文请求，逐步解决它，并最终格式化输出答案。</td>
+              <td>I want you to act as a commonsense reasoning expert for
+                Chinese.Request：以下陈述是否包含时代错误，请选择正确选项。一个接受了义务教育、具备基本常识的人会如何选择？李白用钢笔写诗。选项：(A) 是 (B) 否<br>You should retell
+                the request in English.<br>You should do the answer step by step to choose the right answer.You should
+                step-by-step answer the request.<br>You should tell me the answer in this format 'So the answer
+                is'.<br>Request: How would a typical person answer each of the following statements whether it contains
+                an
+                anachronism? Li Bai writes poetry with a pen. Option:(A) Yes (B) No<br>Step-by-step answer:<br>1.This
+                statement mentions "Li Bai", a poet from the Tang Dynasty in China.<br>2.The pen mentioned in the
+                statement is a modern device.<br>3. so, it is impossible for Li Bai to write poetry with a pen. This
+                statement contains errors from the times. <br>So the answer is (A).</td>
+            </tr>
+          </tbody>
+        </table>
+        <p></p>
+        <p>
+          我们在CHARM推理任务中测试了19种LLMs和5种提示策略的组合。结果显示在下面的表格中。
+        </p>
+        <p></p>
+        <h4> 在CHARM推理任务中的平均准确率</h4>
+        <table align="center">
+          <thead class="fixed-header">
+            <tr>
+              <th></th>
+              <th><strong>提示策略</strong></th>
+              <th><strong>所有模型平均</strong></th>
+              <th><strong>中文大模型平均</strong></th>
+              <th><strong>英文大模型平均</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="5">所有常识领域平均</td>
+              <td>Direct</td>
+              <td>46.28</td>
+              <td>48.41</td>
+              <td>42.64</td>
+            </tr>
+            <tr>
+              <td>ZH-CoT</td>
+              <td>56.66</td>
+              <td><strong>62.40</strong></td>
+              <td>46.81</td>
+            </tr>
+            <tr>
+              <td>EN-CoT</td>
+              <td>54.46</td>
+              <td>58.19</td>
+              <td>48.06</td>
+            </tr>
+            <tr>
+              <td>Translate-EN</td>
+              <td>53.88</td>
+              <td>55.51</td>
+              <td>51.07</td>
+            </tr>
+            <tr>
+              <td>XLT</td>
+              <td>56.81</td>
+              <td>59.09</td>
+              <td><strong>52.90</strong></td>
+            </tr>
+            <tr>
+              <td rowspan="5">中国常识领域平均</td>
+              <td>Direct</td>
+              <td>45.43</td>
+              <td>47.76</td>
+              <td>41.44</td>
+            </tr>
+            <tr>
+              <td>ZH-CoT</td>
+              <td><strong>56.35</strong></td>
+              <td><strong>62.23</strong></td>
+              <td>46.26</td>
+            </tr>
+            <tr>
+              <td>EN-CoT</td>
+              <td>52.06</td>
+              <td>56.36</td>
+              <td>44.68</td>
+            </tr>
+            <tr>
+              <td>Translate-EN</td>
+              <td>47.25</td>
+              <td>47.82</td>
+              <td>46.27</td>
+            </tr>
+            <tr>
+              <td>XLT</td>
+              <td>53.80</td>
+              <td>56.63</td>
+              <td><strong>48.96</strong></td>
+            </tr>
+            <tr>
+              <td rowspan="5">全球常识领域平均</td>
+              <td>Direct</td>
+              <td>47.13</td>
+              <td>49.05</td>
+              <td>43.85</td>
+            </tr>
+            <tr>
+              <td>ZH-CoT</td>
+              <td>56.96</td>
+              <td>62.57</td>
+              <td>47.35</td>
+            </tr>
+            <tr>
+              <td>EN-CoT</td>
+              <td>56.85</td>
+              <td>60.01</td>
+              <td>51.44</td>
+            </tr>
+            <tr>
+              <td>Translate-EN</td>
+              <td><strong>60.50</strong></td>
+              <td><strong>63.20</strong></td>
+              <td>55.87</td>
+            </tr>
+            <tr>
+              <td> XLT</td>
+              <td>59.82</td>
+              <td>61.56</td>
+              <td><strong>56.84</strong></td>
+            </tr>
+        </table>
+
+        <p></p>
+
+        <body>
+          <p>💡 结果显示，LLMs的语言取向和任务的知识领域会影响提示策略的表现，这进一步丰富了先前的研究发现。</p>
+          <p><strong>从 LLM 维度来看,</strong> 不同的 LLMs 显然偏好不同的提示策略：在5种策略中，XLT 对于英文 LLMs 始终表现优秀，而对于面向中文的
+            LLMs，尽管存在一些复杂性，但 ZH-CoT 通常表现最好。</p>
+
+          <p><strong>从常识领域维度来看,</strong> 使用英文进行推理的策略（如 XLT、Translate-EN 等）适用于全球常识领域；然而，ZH-CoT 在中国常识领域中的表现通常更好。</p>
+
+          <p>这里的结论与前面的研究有所不同 (<a href="https://arxiv.org/pdf/2305.07004.pdf">Huang et
+              al., 2023a</a>, <a href="https://aclanthology.org/2023.emnlp-main.491.pdf">Zhang et al., 2023a</a>, <a
+              href="https://arxiv.org/pdf/2210.03057.pdf">Shi et al., 2022</a>),之前的研究提出，在处理非英文的推理任务时，使用英文比使用题目本身的语言更为有效。
+          </p>
+
+
+        </body>
+
+      </section>
+
+      <section id="teaser-image">
+
+        <body>
+          <h3>综合推理与记忆的对比</h3>
+          <p> 我们评估了在 MRI 任务上，综合推理与记忆之间的相关性。下面是 LLMs 在 4 个 MRI 任务上的平均表现。</p>
+        </body>
+        <hr>
+        <center>
+          <figure>
+            <a>
+              <img width="80%" src="./figure/Fig_mem-integrated_rea-avg_v4.png">
+            </a>
+            <p class="caption" , style="text-align: center;">
+              在中国常识领域的4项MRI任务中的平均准确率。
+            </p>
+          </figure>
+        </center>
+        <p>💡 如图所示，这19个 LLMs 大致可以被分为三种类型：</p>
+        <ul>
+          <li><strong>类型 I：低记忆能力和低综合推理能力。</strong> 我们发现，除了 OpenAI 的 GPT
+            系列外，所有其他的英文 LLMs 都属于这个类型。</li>
+          <li><strong>类型 II：高记忆能力和中等综合推理能力。</strong> GPT3.5 和所有规模在 30B 以下的面向中文的 LLMs 都属于这个类型。值得注意的是，一些 LLMs
+            具有高度的记忆性能，但相对较差的综合推理能力。</li>
+          <li><strong>类型 III：超高记忆能力和高综合推理能力。</strong> 个类别包括 GPT4 和三个规模超过 30B 的面向中文的 LLMs。</li>
+        </ul>
+
+        <h3>独立于记忆的推理</h3>
+        <p>我们提出了两种方法来比较 LLMs 在 MRI 任务上独立于记忆的推理能力：
+          <strong>Mono-LLM-Memorization (FRMM) and Memorization-Independent Battles among LLMs (MIB)</strong>. （关于 FRMM
+          和 MIB 方法的具体细节，请参阅<a href="https://arxiv.org/abs/2403.14112">论文</a>。 以下是 FRMM 和 MIB 方法的结果。
+        </p>
+        <table align="center">
+          <h4>Leaderboard on the MRI tasks.</h4>
+          <thead class="fixed-header">
+            <tr>
+              <th rowspan="2">排行</th>
+              <th rowspan="2">综合推理</th>
+              <th colspan="2">独立于记忆的推理</th>
+            </tr>
+            <tr>
+              <th>FRMM</th>
+              <th>MIB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>DeepSeek-67B</td>
+              <td>Yi-34B (<span style="color:red;">↑3</span>)</td>
+              <td>GPT-4 (<span style="color:red;">↑2</span>)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Qwen-72B</td>
+              <td>DeepSeek-67B (<span style="color:green;">↓1</span>)</td>
+              <td>Yi-34B (<span style="color:red;">↑2</span>)</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>GPT-4</td>
+              <td>GPT-4 (-)</td>
+              <td>Qwen-72B (<span style="color:green;">↓1</span>)</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Yi-34B</td>
+              <td>Qwen-72B (<span style="color:green;">↓2</span>)</td>
+              <td>DeepSeek-67B (<span style="color:green;">↓3</span>)</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Qwen-14B</td>
+              <td>GPT-3.5 (<span style="color:red;">↑2</span>)</td>
+              <td>GPT-3.5 (<span style="color:red;">↑2</span>)</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>InternLM2-20B</td>
+              <td>Qwen-14B (<span style="color:green;">↓1</span>)</td>
+              <td>Qwen-14B (<span style="color:green;">↓1</span>)</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>GPT-3.5</td>
+              <td>InternLM2-20B (<span style="color:green;">↓1</span>)</td>
+              <td>InternLM2-20B (<span style="color:green;">↓1</span>)</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>InternLM2-7B</td>
+              <td>InternLM2-7B (-)</td>
+              <td>InternLM2-7B (-)</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>DeepSeek-7B</td>
+              <td>Baichuan2-13B (<span style="color:red;">↑1</span>)</td>
+              <td>Baichuan2-13B (<span style="color:red;">↑1</span>)</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Baichuan2-13B</td>
+              <td>DeepSeek-7B (<span style="color:green;">↓1</span>)</td>
+              <td>DeepSeek-7B (<span style="color:green;">↓1</span>)</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Baichuan2-7B</td>
+              <td>Yi-6B (<span style="color:red;">↑3</span>)</td>
+              <td>Baichuan2-7B (-)</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>ChatGLM3-6B</td>
+              <td>ChatGLM3-6B (-)</td>
+              <td>ChatGLM3-6B (-)</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Qwen-7B</td>
+              <td>Baichuan2-7B (<span style="color:green;">↓2</span>)</td>
+              <td>Qwen-7B (-)</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>Yi-6B</td>
+              <td>Qwen-7B (<span style="color:green;">↓1</span>)</td>
+              <td>Yi-6B (-)</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>LLaMA-2-70B</td>
+              <td>LLaMA-2-13B (<span style="color:red;">↑1</span>)</td>
+              <td>LLaMA-2-13B (<span style="color:red;">↑1</span>)</td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>LLaMA-2-13B</td>
+              <td>LLaMA-2-70B (<span style="color:green;">↓1</span>)</td>
+              <td>LLaMA-2-70B (<span style="color:green;">↓1</span>)</td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>Vicuna-13B-v1.5</td>
+              <td>Vicuna-13B-v1.5 (-)</td>
+              <td>Vicuna-13B-v1.5 (-)</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>Vicuna-7B-v1.5</td>
+              <td>LLaMA-2-7B (<span style="color:red;">↑1</span>)</td>
+              <td>Vicuna-7B-v1.5 (-)</td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>LLaMA-2-7B</td>
+              <td>Vicuna-7B-v1.5 (<span style="color:green;">↓1</span>)</td>
+              <td>LLaMA-2-7B (-)</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </section>
+      <section>
+
+        <body>
+          <p>💡 如果大型语言模型（LLMs）对保留的推理问题提供了错误的回答，这些可以被称为独立于记忆的推理错误。我们通过手动审查推理过程来分析这些错误，并将它们归类为四个主要类型</p>
+          <ul>
+            <li><strong>理解错误：</strong>在这种情况下，LLM 无法准确理解问题，包括误解内容，忽视甚至修改前提中的重要信息，以及未能把握问题的核心查询。</li>
+            <li><strong>知识错误：</strong> LLM 在推理过程中融入了不准确的知识。值得强调的是，与推理问题相关的知识片段在之前的相关记忆问题中已经被检查过，而 LLM
+              正确地回答了这些问题。然而，在推理阶段，LLM 输出的信息是不正确的。</li>
+            <li><strong>逻辑错误：</strong> LLM 犯了逻辑推理错误，比如数学推理错误，无法基于足够的信息得出正确的结论，或者达到正确的结论但输出了错误的选项。</li>
+            <li><strong>其他错误：</strong> These are other scattered, relatively rare types of errors.</li>
+          </ul>
+
+          <p>💡 独立于记忆的推理错误的分布</p>
+          <center>
+            <figure>
+              <a>
+                <img width="95%" src="./figure/Fig_pie_chart-mem_independent_err-3LLms.png">
+              </a>
+              <p class="caption" , style="text-align: center;">
+                独立于记忆的推理错误的分布
+              </p>
+            </figure>
+          </center>
+          <p>💡 LLMs 的三种类型的独立于记忆的推理错误示例</p>
+          <center>
+            <figure>
+              <a>
+                <img width="95%" src="./figure/Fig_mem-independent-rea-err-example.png">
+              </a>
+              <p class="caption" , style="text-align: center;">
+                LLMs的3种类型独立于记忆的推理错误的示例。
+
+              </p>
+            </figure>
+          </center>
+        </body>
+        <h3>🖊️ 引用</h3>
+        <pre>
+    @misc{sun2024benchmarking,
+          title={Benchmarking Chinese Commonsense Reasoning of LLMs: From Chinese-Specifics to Reasoning-Memorization Correlations}, 
+          author={Jiaxing Sun and Weiquan Huang and Jiang Wu and Chenya Gu and Wei Li and Songyang Zhang and Hang Yan and Conghui He},
+          year={2024},
+          eprint={2403.14112},
+          archivePrefix={arXiv},
+          primaryClass={cs.CL}
+    }
+    </pre>
+
+
+    </div>
+
+
+  </div>
+</body>
+
+</html>
