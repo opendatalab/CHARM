@@ -37,7 +37,7 @@ class CharmReaSummarizer:
         dst_root_dir,
         zh_prompting_name,
         en_prompting_name,
-        dataset_prefix='rea-',
+        dataset_prefix='charm-reason-',
     ):
         if isinstance(sum_files, str):
             sum_files = [sum_files]
@@ -76,13 +76,7 @@ class CharmReaSummarizer:
             assert df.columns[0] == 'dataset'
 
         self.sum_df = pd.concat(dfs, ignore_index=True)
-
-        # check duplicated dataset
-        assert self.sum_df['dataset'].duplicated().sum(
-        ) == 0, "duplicated dataset in sum files"
-
-        drop_cols = ["version", "metric", "mode"]
-        self.sum_df = self.sum_df.drop(columns=drop_cols)
+        self.sum_df.fillna("", inplace=True)
 
         n_row_total = self.sum_df.shape[0]
         n_row_suffix = self.sum_df['dataset'].str.startswith(
@@ -93,6 +87,19 @@ class CharmReaSummarizer:
         )
         self.sum_df = self.sum_df[self.sum_df['dataset'].str.startswith(
             self.dataset_prefix)]
+
+        n_row_total = self.sum_df.shape[0]
+        n_row_metric_score = (self.sum_df['metric'] == 'score').sum()
+        print(
+            f"drop {n_row_total-n_row_metric_score} rows not metric is score")
+        self.sum_df = self.sum_df[self.sum_df['metric'] == 'score']
+
+        # check duplicated dataset
+        assert self.sum_df['dataset'].duplicated().sum(
+        ) == 0, "duplicated dataset in sum files"
+
+        drop_cols = ["version", "metric", "mode"]
+        self.sum_df = self.sum_df.drop(columns=drop_cols)
 
         # remove the dataset_prefix
         self.sum_df['dataset'] = self.sum_df['dataset'].apply(
@@ -110,6 +117,8 @@ class CharmReaSummarizer:
 
         self.sum_df.set_index(['task', 'prompting'], inplace=True)
         self.sum_df.drop(columns=['dataset'], inplace=True)
+
+        self.sum_df = self.sum_df.apply(pd.to_numeric, errors='ignore')
 
         self.sum_df.to_csv(osp.join(self.dst_root_dir, "summary_raw.csv"))
 
@@ -234,7 +243,9 @@ class CharmReaSummarizer:
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("compass_csv_file", type=str, help="compass summary csv file")
+    parser.add_argument("compass_csv_file",
+                        type=str,
+                        help="compass summary csv file")
 
     args = parser.parse_args()
     sum_file = osp.realpath(args.compass_csv_file)

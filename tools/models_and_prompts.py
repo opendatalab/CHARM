@@ -27,6 +27,7 @@ RENAME_MODEL_DICT = {
     "qwen-7b-chat-hf": "Qwen-7B",
     "qwen-14b-chat-hf": "Qwen-14B",
     "qwen-72b-chat-hf": "Qwen-72B",
+    "qwen1.5-1.8b-chat-hf": "Qwen1.5-1.8B",
     "qwen1.5-7b-chat-hf": "Qwen1.5-7B",
     "qwen1.5-14b-chat-hf": "Qwen1.5-14B",
     "qwen1.5-72b-chat-hf": "Qwen1.5-72B",
