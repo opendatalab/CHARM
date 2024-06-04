@@ -177,7 +177,7 @@ class CharmReaSummarizer:
         assert all(
             [_.lower().startswith(('cn_', 'chinese_')) for _ in self.cn_tasks])
 
-    def output_tables(self):
+    def output_leaderboard(self):
 
         df = deepcopy(self.task_df)
         assert set(df.columns.tolist()).issubset(
@@ -236,8 +236,60 @@ class CharmReaSummarizer:
         df2.to_csv(osp.join(self.dst_root_dir, f"{out_basename}.csv"))
         df2.to_excel(osp.join(self.dst_root_dir, f"{out_basename}.xlsx"))
 
+    def _analyze_prompting_mean_axis0(self, src_df):
+
+        mean_df = src_df.groupby(level='prompting').mean()
+
+        other_cols = mean_df.columns.to_list()
+
+        mean_df_copy = deepcopy(mean_df)
+        mean_df['Avg. all LLMs'] = mean_df_copy.mean(axis=1)
+        mean_df['Avg. Chinese-oriented LLMs'] = mean_df_copy[
+            self.CN_LLMs].mean(axis=1)
+        mean_df['Avg. English LLMs'] = mean_df_copy[self.EN_LLMs].mean(axis=1)
+
+        mean_df = mean_df[[
+            'Avg. all LLMs', 'Avg. Chinese-oriented LLMs', 'Avg. English LLMs'
+        ] + other_cols]
+
+        sorted_index = sort_by_prompting(mean_df.index)
+        mean_df = mean_df.reindex(sorted_index)
+
+        return mean_df.round(decimals=2)
+
+    def analyze_prompting(self, src_df):
+
+        dst_dir = self.dst_root_dir
+        os.makedirs(dst_dir, exist_ok=True)
+
+        # average over tasks along axis=0
+        axis0_mean_all_df = self._analyze_prompting_mean_axis0(src_df)
+
+        cn_src_df = src_df.loc[self.cn_tasks]
+        gl_src_df = src_df.loc[self.gl_tasks]
+        axis0_mean_cn_df = self._analyze_prompting_mean_axis0(cn_src_df)
+        axis0_mean_gl_df = self._analyze_prompting_mean_axis0(gl_src_df)
+
+        # cat the above three df to one along axis=0, and add a new multi-index
+        axis0_mean_df = pd.concat(
+            [
+                axis0_mean_all_df,
+                axis0_mean_cn_df,
+                axis0_mean_gl_df,
+            ],
+            axis=0,
+            keys=[
+                f'Avg. all tasks',
+                f'Avg. cn_tasks',
+                f'Avg. gl_tasks',
+            ],
+        )
+        axis0_mean_df.to_csv(osp.join(dst_dir, f"Table6.csv"))
+        axis0_mean_df.to_excel(osp.join(dst_dir, f"Table6.xlsx"))
+
     def process(self):
-        self.output_tables()
+        self.output_leaderboard()
+        self.analyze_prompting(self.task_df)
 
 
 def main():
