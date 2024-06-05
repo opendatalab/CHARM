@@ -27,6 +27,56 @@ avg_cn_tasks = 'Avg. cn tasks'
 avg_gl_tasks = 'Avg. gl tasks'
 
 
+def load_rea_sum_files(sum_files, dataset_prefix):
+
+    for sum_file in sum_files:
+        assert osp.isfile(sum_file), f"{sum_file} does not exist"
+        assert sum_file.endswith('.csv'), f"{sum_file} is not a csv file"
+
+    dfs = []
+    for sum_file in sum_files:
+        df = pd.read_csv(sum_file)
+        dfs.append(df)
+        print(f"{sum_file}: {df.shape}")
+
+    col_names = dfs[0].columns
+    for df in dfs:
+        assert df.columns.tolist() == col_names.tolist(
+        ), "columns of sum files are not the same"
+        assert df.columns[0] == 'dataset'
+
+    sum_df = pd.concat(dfs, ignore_index=True)
+    sum_df.fillna("", inplace=True)
+
+    n_row_total = sum_df.shape[0]
+    n_row_suffix = sum_df['dataset'].str.startswith(dataset_prefix).sum()
+    print(f"{n_row_total=}")
+    print(
+        f"drop {n_row_total-n_row_suffix} rows not startswith {dataset_prefix}"
+    )
+    sum_df = sum_df[sum_df['dataset'].str.startswith(dataset_prefix)]
+
+    n_row_total = sum_df.shape[0]
+    n_row_metric_score = (sum_df['metric'] == 'score').sum()
+    print(f"drop {n_row_total-n_row_metric_score} rows not metric is score")
+    sum_df = sum_df[sum_df['metric'] == 'score']
+
+    # check duplicated dataset
+    assert sum_df['dataset'].duplicated().sum(
+    ) == 0, "duplicated dataset in sum files"
+
+    drop_cols = ["version", "metric", "mode"]
+    sum_df = sum_df.drop(columns=drop_cols)
+
+    # remove the dataset_prefix
+    sum_df['dataset'] = sum_df['dataset'].apply(
+        lambda x: x[len(dataset_prefix):])
+
+    sum_df.sort_values(by=['dataset'], inplace=True)
+
+    return sum_df
+
+
 class CharmReaSummarizer:
 
     def __init__(
@@ -59,53 +109,7 @@ class CharmReaSummarizer:
 
     def _load_sum_files(self):
 
-        for sum_file in self.sum_files:
-            assert osp.isfile(sum_file), f"{sum_file} does not exist"
-            assert sum_file.endswith('.csv'), f"{sum_file} is not a csv file"
-
-        dfs = []
-        for sum_file in self.sum_files:
-            df = pd.read_csv(sum_file)
-            dfs.append(df)
-            print(f"{sum_file}: {df.shape}")
-
-        col_names = dfs[0].columns
-        for df in dfs:
-            assert df.columns.tolist() == col_names.tolist(
-            ), "columns of sum files are not the same"
-            assert df.columns[0] == 'dataset'
-
-        self.sum_df = pd.concat(dfs, ignore_index=True)
-        self.sum_df.fillna("", inplace=True)
-
-        n_row_total = self.sum_df.shape[0]
-        n_row_suffix = self.sum_df['dataset'].str.startswith(
-            self.dataset_prefix).sum()
-        print(f"{n_row_total=}")
-        print(
-            f"drop {n_row_total-n_row_suffix} rows not startswith {self.dataset_prefix}"
-        )
-        self.sum_df = self.sum_df[self.sum_df['dataset'].str.startswith(
-            self.dataset_prefix)]
-
-        n_row_total = self.sum_df.shape[0]
-        n_row_metric_score = (self.sum_df['metric'] == 'score').sum()
-        print(
-            f"drop {n_row_total-n_row_metric_score} rows not metric is score")
-        self.sum_df = self.sum_df[self.sum_df['metric'] == 'score']
-
-        # check duplicated dataset
-        assert self.sum_df['dataset'].duplicated().sum(
-        ) == 0, "duplicated dataset in sum files"
-
-        drop_cols = ["version", "metric", "mode"]
-        self.sum_df = self.sum_df.drop(columns=drop_cols)
-
-        # remove the dataset_prefix
-        self.sum_df['dataset'] = self.sum_df['dataset'].apply(
-            lambda x: x[len(self.dataset_prefix):])
-
-        self.sum_df.sort_values(by=['dataset'], inplace=True)
+        self.sum_df = load_rea_sum_files(self.sum_files, self.dataset_prefix)
 
     def _auto_parse_prompting(self):
 

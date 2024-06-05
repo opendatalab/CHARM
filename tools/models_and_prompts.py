@@ -46,7 +46,9 @@ CN_BRANDS = [
     'qwen',
 ]  # 国内
 EN_BRANDS = [
-    'gpt',
+    'gpt-3',
+    'gpt-4',
+    'gemini',
     'llama-2',
     'llama-3',
     'vicuna',
@@ -82,11 +84,16 @@ def is_EN_LLM(model_name):
 def get_model_size_b(model_name):
     assert isinstance(model_name, str)
     model_name = model_name.lower()
+
+    if 'gpt' in model_name or 'gemini' in model_name:
+        # We don't know the exact size of GPT or Gemini
+        return 10  # just for display in figures
+
     model_name_split = model_name.split('-')
     assert sum([int(_.endswith('b')) for _ in model_name_split]) == 1
     for _ in model_name_split:
         if _.endswith('b'):
-            return int(_.replace('b', ''))
+            return float(_.replace('b', ''))
 
 
 # ====================================================
@@ -103,35 +110,34 @@ PROMPT_ORDER = [_.lower() for _ in PROMPT_ORDER]
 # ====================================================
 
 
-def compare_model_and_prompting(src_tuple1, src_tuple2):
-
-    assert isinstance(src_tuple1, tuple)
-    assert isinstance(src_tuple2, tuple)
-    assert len(src_tuple1) == len(src_tuple2)
-    assert len(src_tuple1) > 1
-    model_name1 = src_tuple1[0]
-    model_name2 = src_tuple2[0]
-    prompting1 = src_tuple1[1]
-    prompting2 = src_tuple2[1]
-    assert isinstance(model_name1, str)
-    assert isinstance(model_name2, str)
+def compare_prompting(prompting1, prompting2):
     assert isinstance(prompting1, str)
     assert isinstance(prompting2, str)
 
-    model_name1 = model_name1.lower()
-    model_name2 = model_name2.lower()
     prompting1 = prompting1.lower()
     prompting2 = prompting2.lower()
 
-    # if same model, sort according to prompting
-    if model_name1 == model_name2:
-        if prompting1 == prompting2:
-            return 0
-        for _ in PROMPT_ORDER:
-            if _ == prompting1:
-                return -1
-            elif _ == prompting2:
-                return 1
+    if prompting1 == prompting2:
+        return 0
+
+    if prompting1 not in PROMPT_ORDER:
+        return 1
+    if prompting2 not in PROMPT_ORDER:
+        return -1
+
+    for _ in PROMPT_ORDER:
+        if _ == prompting1:
+            return -1
+        elif _ == prompting2:
+            return 1
+
+
+def compare_model(model_name1, model_name2):
+    assert isinstance(model_name1, str)
+    assert isinstance(model_name2, str)
+
+    model_name1 = model_name1.lower()
+    model_name2 = model_name2.lower()
 
     # CN_LLM < EN_LLM
     if is_CN_LLM(model_name1) and is_EN_LLM(model_name2):
@@ -179,34 +185,43 @@ def compare_model_and_prompting(src_tuple1, src_tuple2):
             return -1 if model_name1 < model_name2 else 1
 
 
+def compare_model_and_prompting(src_tuple1, src_tuple2):
+
+    assert isinstance(src_tuple1, tuple)
+    assert isinstance(src_tuple2, tuple)
+    assert len(src_tuple1) == len(src_tuple2)
+    assert len(src_tuple1) > 1
+    model_name1 = src_tuple1[0]
+    model_name2 = src_tuple2[0]
+    prompting1 = src_tuple1[1]
+    prompting2 = src_tuple2[1]
+    assert isinstance(model_name1, str)
+    assert isinstance(model_name2, str)
+    assert isinstance(prompting1, str)
+    assert isinstance(prompting2, str)
+
+    model_name1 = model_name1.lower()
+    model_name2 = model_name2.lower()
+    prompting1 = prompting1.lower()
+    prompting2 = prompting2.lower()
+
+    # if same model, sort according to prompting
+    if model_name1 == model_name2:
+        return compare_prompting(prompting1, prompting2)
+
+    return compare_model(model_name1, model_name2)
+
+
+def sort_by_prompting(src_list):
+    return sorted(src_list, key=cmp_to_key(compare_prompting))
+
+
+def sort_by_model(model_list):
+    return sorted(model_list, key=cmp_to_key(compare_model))
+
+
 def sort_by_model_and_prompting(src_index):
 
     assert src_index.names[0] == 'model'
     assert src_index.names[1] == 'prompting'
     return sorted(src_index, key=cmp_to_key(compare_model_and_prompting))
-
-
-def compare_prompting(prompting1, prompting2):
-    assert isinstance(prompting1, str)
-    assert isinstance(prompting2, str)
-
-    prompting1 = prompting1.lower()
-    prompting2 = prompting2.lower()
-
-    if prompting1 == prompting2:
-        return 0
-
-    if prompting1 not in PROMPT_ORDER:
-        return 1
-    if prompting2 not in PROMPT_ORDER:
-        return -1
-
-    for _ in PROMPT_ORDER:
-        if _ == prompting1:
-            return -1
-        elif _ == prompting2:
-            return 1
-
-
-def sort_by_prompting(src_list):
-    return sorted(src_list, key=cmp_to_key(compare_prompting))
