@@ -14,7 +14,7 @@ from models_and_prompts import (
     get_model_size_b,
 )
 
-from summarize_reasoning import load_rea_sum_files
+from utils import load_rea_sum_files, load_mem_sum_file
 
 # ===================== 简称命名规则 =====================
 # ------- 任务的domain
@@ -34,7 +34,7 @@ class CharmMemReaSummarizer:
         self,
         *,
         rea_sum_file,
-        mem_sum_dir,
+        mem_sum_file,
         task_names,
         dst_root_dir,
         reasoning_random_scores=None,
@@ -42,11 +42,11 @@ class CharmMemReaSummarizer:
         mem_prefix='charm-memory-',
     ):
         assert osp.isfile(rea_sum_file), f"{rea_sum_file} does not exist"
-        assert osp.isdir(mem_sum_dir), f"{mem_sum_dir} does not exist"
+        assert osp.isfile(mem_sum_file), f"{mem_sum_file} does not exist"
         assert isinstance(task_names, list)
 
         self.rea_sum_file = rea_sum_file
-        self.mem_sum_dir = mem_sum_dir
+        self.mem_sum_file = mem_sum_file
         self.task_names = task_names
 
         self.dst_root_dir = dst_root_dir
@@ -61,39 +61,9 @@ class CharmMemReaSummarizer:
 
     def _load_sum_files(self):
 
-        # ------------------ load rea
         self.rea_df = load_rea_sum_files([self.rea_sum_file], self.rea_prefix)
-
-        # ------------------ load mem
-        csv_files = os.listdir(self.mem_sum_dir)
-        csv_files = [f for f in csv_files if f.endswith('.csv')]
-
-        assert all(_.startswith('judged-by--') for _ in csv_files)
-
-        task_names = [_.split(self.mem_prefix)[1] for _ in csv_files]
-        task_names = [_.split('.csv')[0] for _ in task_names]
-
-        expected_task_names = deepcopy(self.task_names)
-        if 'avg_4task' in expected_task_names:
-            expected_task_names.remove('avg_4task')
-        assert set(task_names) == set(
-            expected_task_names), f"{task_names} != {expected_task_names}"
-
-        mem_df = pd.DataFrame()
-        for task_name, csv_file in zip(task_names, csv_files):
-            csv_file = osp.join(self.mem_sum_dir, csv_file)
-            df = pd.read_csv(csv_file)
-
-            expected_cols = ["model", "total"]
-            assert set(expected_cols) == set(df.columns)
-
-            df.set_index("model", inplace=True)
-
-            mem_df[task_name] = df["total"]
-
-        self.mem_df = mem_df.T
-        self.mem_df.index.name = 'task'
-        self.mem_df = self.mem_df * 100
+        self.mem_df = load_mem_sum_file(self.mem_sum_file, self.task_names,
+                                       self.mem_prefix)
 
     def _preprocess_sum_df(self):
 
@@ -267,9 +237,9 @@ if __name__ == '__main__':
         type=str,
         help="opencompass summary csv file for reasoning tasks")
     parser.add_argument(
-        "mem_compass_dir",
+        "mem_compass_csv_file",
         type=str,
-        help="opencompass summary directory for memorization tasks")
+        help="opencompass summary csv file for memorization tasks")
     parser.add_argument("--dst_root_dir",
                         type=str,
                         default="output/CHARM_rea_mem_relation",
@@ -295,7 +265,7 @@ if __name__ == '__main__':
     os.system(f"rm -rf {dst_root_dir}")
     summarizer = CharmMemReaSummarizer(
         rea_sum_file=args.rea_compass_csv_file,
-        mem_sum_dir=args.mem_compass_dir,
+        mem_sum_file=args.mem_compass_csv_file,
         task_names=task_names,
         reasoning_random_scores=reasoning_random_scores,
         dst_root_dir=dst_root_dir,
