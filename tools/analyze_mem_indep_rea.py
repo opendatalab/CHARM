@@ -436,7 +436,7 @@ class CharmMemSelector:
 
 class FRMMAnalyzer:
     """
-    create Table12 and part of Table7 in https://arxiv.org/abs/2403.14112
+    generate Table12 and part of Table7 in https://arxiv.org/abs/2403.14112
     """
 
     def __init__(self, src_models, dst_FRMM_dir):
@@ -530,7 +530,7 @@ class FRMMAnalyzer:
 
 class MIBAnalyzer:
     """
-    create Figure11, Table13 and part of Table7 in https://arxiv.org/abs/2403.14112
+    generate Figure11, Table13 and part of Table7 in https://arxiv.org/abs/2403.14112
     """
 
     def __init__(self, src_models, dst_MIB_dir):
@@ -598,7 +598,7 @@ class MIBAnalyzer:
 
     def draw_combat_matrix(self):
         """
-        create Table13 and Figure11
+        generate Table13 and Figure11
         """
         dst_dir = osp.join(self.dst_MIB_dir, "_combat_mat")
         os.makedirs(dst_dir, exist_ok=True)
@@ -653,7 +653,7 @@ class MIBAnalyzer:
 
     def rank_models(self):
         """
-        create part of Table7
+        generate part of Table7
         """
         dst_dir = osp.join(self.dst_MIB_dir, "_ranking")
         os.makedirs(dst_dir, exist_ok=True)
@@ -709,7 +709,7 @@ class MIBAnalyzer:
 
 def merge_two_rank(dst_FRMM_dir, dst_MIB_dir, dst_root_dir):
     """
-    create Table7 in https://arxiv.org/abs/2403.14112
+    generate Table7 in https://arxiv.org/abs/2403.14112
     """
     rank1_csv = osp.join(dst_FRMM_dir, "_ranking", "Table7_FRMM.csv")
     rank2_csv = osp.join(dst_MIB_dir, "_ranking", "Table7_MIB.csv")
@@ -806,7 +806,7 @@ def main():
         )
         selector.process()
 
-    # create Table12 and part of Table7 in https://arxiv.org/abs/2403.14112
+    # generate Table12 and part of Table7 in https://arxiv.org/abs/2403.14112
     frmm = FRMMAnalyzer(src_models=src_models, dst_FRMM_dir=dst_FRMM_dir)
     frmm.process()
 
@@ -831,11 +831,11 @@ def main():
             )
             selector.process()
 
-    # create Figure11, Table13 and part of Table7 in https://arxiv.org/abs/2403.14112
+    # generate Figure11, Table13 and part of Table7 in https://arxiv.org/abs/2403.14112
     mib = MIBAnalyzer(src_models=src_models, dst_MIB_dir=dst_MIB_dir)
     mib.process()
 
-    # --------------------------------------- create Table7 in https://arxiv.org/abs/2403.14112
+    # --------------------------------------- generate Table7 in https://arxiv.org/abs/2403.14112
     merge_two_rank(dst_FRMM_dir, dst_MIB_dir, dst_root_dir)
 
 

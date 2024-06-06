@@ -29,6 +29,9 @@ avg_gl_tasks = 'Avg. gl tasks'
 
 
 class CharmReaSummarizer:
+    """
+    generate Table5, Table6, Table9 and Table10 in https://arxiv.org/abs/2403.14112
+    """
 
     def __init__(
         self,
@@ -133,7 +136,9 @@ class CharmReaSummarizer:
             [_.lower().startswith(('cn_', 'chinese_')) for _ in self.cn_tasks])
 
     def output_leaderboard(self):
-
+        """
+        generate Table5, Table9 and Table10 in https://arxiv.org/abs/2403.14112
+        """
         df = deepcopy(self.task_df)
         assert set(df.columns.tolist()).issubset(
             set(list(RENAME_MODEL_DICT.keys())))
@@ -213,7 +218,9 @@ class CharmReaSummarizer:
         return mean_df.round(decimals=2)
 
     def analyze_prompting(self, src_df):
-
+        """
+        generate Table9 in https://arxiv.org/abs/2403.14112
+        """
         dst_dir = self.dst_root_dir
         os.makedirs(dst_dir, exist_ok=True)
 
@@ -250,12 +257,12 @@ class CharmReaSummarizer:
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("compass_csv_file",
+    parser.add_argument("rea_csv_file",
                         type=str,
                         help="compass summary csv file")
 
     args = parser.parse_args()
-    sum_file = osp.realpath(args.compass_csv_file)
+    sum_file = osp.realpath(args.rea_csv_file)
     assert osp.isfile(sum_file), f"{sum_file} does not exist"
 
     dst_root_dir = osp.splitext(sum_file)[0]

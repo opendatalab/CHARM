@@ -29,6 +29,9 @@ from utils import load_rea_sum_files, load_mem_sum_file
 
 
 class CharmMemReaSummarizer:
+    """
+    generate Figure3 and Figure9 in https://arxiv.org/abs/2403.14112
+    """
 
     def __init__(
         self,
@@ -63,7 +66,7 @@ class CharmMemReaSummarizer:
 
         self.rea_df = load_rea_sum_files([self.rea_sum_file], self.rea_prefix)
         self.mem_df = load_mem_sum_file(self.mem_sum_file, self.task_names,
-                                       self.mem_prefix)
+                                        self.mem_prefix)
 
     def _preprocess_sum_df(self):
 
@@ -233,11 +236,11 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "rea_compass_csv_file",
+        "rea_csv_file",
         type=str,
         help="opencompass summary csv file for reasoning tasks")
     parser.add_argument(
-        "mem_compass_csv_file",
+        "mem_csv_file",
         type=str,
         help="opencompass summary csv file for memorization tasks")
     parser.add_argument("--dst_root_dir",
@@ -264,8 +267,8 @@ if __name__ == '__main__':
     dst_root_dir = args.dst_root_dir
     os.system(f"rm -rf {dst_root_dir}")
     summarizer = CharmMemReaSummarizer(
-        rea_sum_file=args.rea_compass_csv_file,
-        mem_sum_file=args.mem_compass_csv_file,
+        rea_sum_file=args.rea_csv_file,
+        mem_sum_file=args.mem_csv_file,
         task_names=task_names,
         reasoning_random_scores=reasoning_random_scores,
         dst_root_dir=dst_root_dir,
