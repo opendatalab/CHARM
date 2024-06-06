@@ -84,6 +84,7 @@
 
 
 ## 🚀 What's New
+- **[2024.6.06]** Leaderboard updated! LLaMA-3, GPT-4o, Gemini-1.5, Yi1.5, Qwen1.5, etc. are evaluated.
 - **[2024.5.24]** CHARM has been open-sourced !!! 🔥🔥🔥
 - **[2024.5.15]** CHARM has been accepted to the main conference of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL 2024) !!! 🔥🔥🔥
 - **[2024.3.21]** Paper available on [ArXiv](https://arxiv.org/abs/2403.14112).
@@ -107,6 +108,8 @@ ln -snf ${path_to_CHARM_repo}/data/CHARM ./data/CHARM
 ```
 ### 3. Run Inference and Evaluation
 ```bash
+cd ${path_to_opencompass}
+
 # modify config file `configs/eval_charm_rea.py`: uncomment or add models you want to evaluate
 python run.py configs/eval_charm_rea.py -r --dump-eval-details
 
