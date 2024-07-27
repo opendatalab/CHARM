@@ -84,13 +84,11 @@
 
 
 ## 🚀 What's New
+- **[2024.7.26]** All inference and evaluation of CHARM are supported by [Opencompass](https://github.com/open-compass/opencompass).🔥🔥🔥
 - **[2024.6.06]** Leaderboard updated! LLaMA-3, GPT-4o, Gemini-1.5, Yi1.5, Qwen1.5, etc. are evaluated.
 - **[2024.5.24]** CHARM has been open-sourced !!! 🔥🔥🔥
 - **[2024.5.15]** CHARM has been accepted to the main conference of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL 2024) !!! 🔥🔥🔥
 - **[2024.3.21]** Paper available on [ArXiv](https://arxiv.org/abs/2403.14112).
-
-## 🧾 TODO
-- [ ] Support inference and evaluation on Opencompass.
 
 ## 🛠️ Inference and Evaluation on Opencompass
 Below are the steps for quickly downloading CHARM and using OpenCompass for evaluation.

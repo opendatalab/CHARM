@@ -82,13 +82,11 @@
 
 
 ## 🚀 新增功能
+- **[2024.7.26]** [Opencompass](https://github.com/open-compass/opencompass)支持CHARM的所有推理和评测任务.🔥🔥🔥
 - **[2024.6.06]** 更新排行榜，评测了LLaMA-3、GPT-4o、Gemini-1.5、Yi1.5、Qwen1.5等模型.
 - **[2024.5.24]** 开源CHARM数据 !!! 🔥🔥🔥
 - **[2024.5.15]** CHARM已被计算语言学协会第62届年会（ACL 2024）主会议接受！！！ 🔥🔥🔥
 - **[2024.3.21]** 论文发布在 [ArXiv](https://arxiv.org/abs/2403.14112).
-
-## 🧾 待办
-- [ ] 支持在Opencompass上进行推理和评测。
 
 ## 🛠️ 在 Opencompass 上进行推理和评测
 以下是快速下载 CHARM 并在 OpenCompass 上进行评估的步骤。
